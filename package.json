@@ -14,7 +14,7 @@
     "format": "prettier --write src/*.ts",
     "clean": "rimraf dist",
     "generate": "ts-json-schema-generator --no-top-ref -f tsconfig.json -t InputOptionsArray -o input.json",
-    "build": "npm run generate && tsc -p tsconfig.json",
+    "build": "npm run generate && tsc",
     "test": "mocha --require ts-node/register src/rule.spec.ts",
     "lint": "prettier --check src/*.ts",
     "prepublishOnly": "npm run clean && npm run build && npm run test"
