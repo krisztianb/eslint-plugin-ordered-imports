@@ -12,7 +12,7 @@ const groups: InputOptions["group-ordering"] = [
 ];
 
 const tester = new RuleTester({
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 6,
     sourceType: "module",
   },

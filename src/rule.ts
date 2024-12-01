@@ -92,7 +92,10 @@ function checkGroups(context: Rule.RuleContext, options: Options, groups: Import
 class Import {
   public group?: ImportGroupDefinition;
 
-  constructor(public declaration: ImportDeclaration, options: Options) {
+  constructor(
+    public declaration: ImportDeclaration,
+    options: Options,
+  ) {
     const source = declaration.source.value as string;
     this.group = options.groupOrdering?.find(g => g.match.test(source));
   }
@@ -109,7 +112,12 @@ class Import {
     reorder(
       context,
       this.declaration.specifiers.filter((s): s is ImportSpecifier => s.type === "ImportSpecifier"),
-      s => getNameKey(s.imported.name, options.specifierOrdering, options.symbolsFirst),
+      s =>
+        getNameKey(
+          s.imported.type === "Identifier" ? s.imported.name : String(s.imported.value),
+          options.specifierOrdering,
+          options.symbolsFirst,
+        ),
       s => s.range!,
       "unordered import specifier",
     );
